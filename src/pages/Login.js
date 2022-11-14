@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Login.css';
+import { connect } from 'react-redux';
+import { actAddUser } from '../redux/actions/userActions';
 
 class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      inputEmail: '',
-      inputPassword: '',
+      emailInput: '',
+      passwordInput: '',
       isDisabled: true,
     };
 
@@ -15,6 +17,7 @@ class Login extends React.Component {
     this.validEmail = this.validEmail.bind(this);
     this.validPassword = this.validPassword.bind(this);
     this.isButtonDisable = this.isButtonDisable.bind(this);
+    this.submmitLogin = this.submmitLogin.bind(this);
   }
 
   handleChange({ target }) {
@@ -26,15 +29,15 @@ class Login extends React.Component {
   }
 
   validEmail() {
-    const { inputEmail } = this.state;
+    const { emailInput } = this.state;
     const regex = /\S+@\S+\.\S+/;
-    return regex.test(inputEmail);
+    return regex.test(emailInput);
   }
 
   validPassword() {
-    const { inputPassword } = this.state;
+    const { passwordInput } = this.state;
     const minLength = 6;
-    return inputPassword.length >= minLength;
+    return passwordInput.length >= minLength;
   }
 
   isButtonDisable() {
@@ -46,30 +49,37 @@ class Login extends React.Component {
     });
   }
 
+  submmitLogin() {
+    const { emailInput } = this.state;
+    const { dispatch, history } = this.props;
+    dispatch(actAddUser(emailInput));
+
+    history.push('/carteira');
+  }
+
   render() {
-    const { inputEmail, inputPassword, isDisabled } = this.state;
-    const { history } = this.props;
+    const { emailInput, passwordInput, isDisabled } = this.state;
     return (
       <section>
         <form>
-          <label htmlFor="inputEmail">
+          <label htmlFor="emailInput">
             email
             <input
-              id="inputEmail"
+              id="emailInput"
               data-testid="email-input"
               type="email"
-              value={ inputEmail }
+              value={ emailInput }
               onChange={ this.handleChange }
               placeholder="email"
             />
           </label>
-          <label htmlFor="inputPassword">
+          <label htmlFor="passwordInput">
             password
             <input
-              id="inputPassword"
+              id="passwordInput"
               data-testid="password-input"
               type="password"
-              value={ inputPassword }
+              value={ passwordInput }
               onChange={ this.handleChange }
               placeholder="password"
             />
@@ -77,7 +87,7 @@ class Login extends React.Component {
           <button
             type="button"
             disabled={ isDisabled }
-            onClick={ () => history.push('/carteira') }
+            onClick={ this.submmitLogin }
           >
             Entrar
 
@@ -89,7 +99,8 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };
 
-export default Login;
+export default connect()(Login);

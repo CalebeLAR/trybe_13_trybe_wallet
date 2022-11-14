@@ -1,15 +1,15 @@
 import { ADD_WALLET } from '../actions/walletActions';
 
-const INITIAL_STATE = {
-  wallet: {
-    currencies: [],
-    expenses: [],
-    editor: false,
-    idToEdit: 0,
-  },
+const WALLET_INITIAL_STATE = {
+  // wallet: {
+  currencies: [],
+  expenses: [],
+  editor: false,
+  idToEdit: 0,
+  // },
 };
 
-const walletReducer = (store = INITIAL_STATE, action) => {
+const wallet = (store = WALLET_INITIAL_STATE, action) => {
   switch (action.type) {
   case ADD_WALLET:
     return ({
@@ -21,4 +21,4 @@ const walletReducer = (store = INITIAL_STATE, action) => {
   }
 };
 
-export default walletReducer;
+export default wallet;
