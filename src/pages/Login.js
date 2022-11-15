@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './Login.css';
 import { connect } from 'react-redux';
 import { actAddUser } from '../redux/actions/userActions';
-import Header from '../components/Header';
+import WalletForm from '../components/WalletForm';
 
 class Login extends React.Component {
   constructor() {
@@ -55,16 +55,16 @@ class Login extends React.Component {
     const { dispatch, history } = this.props;
     dispatch(actAddUser(emailInput));
 
-    history.push('/');
+    history.push('/carteira');
   }
 
   render() {
     const { emailInput, passwordInput, isDisabled } = this.state;
     return (
       <div>
-        <div>
-          <Header />
-        </div>
+        <dia>
+          <WalletForm />
+        </dia>
         <section>
           <form>
             <label htmlFor="emailInput">
