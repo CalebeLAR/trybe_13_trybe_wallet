@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { fetchCurrencies } from '../redux/actions/walletActions';
 
 class WalletForm extends Component {
   constructor() {
     super();
     this.state = {
       isFetching: false,
-      // request: undefined,
       valueInput: '',
       descriptionInput: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.fetchData = this.fetchData.bind(this);
   }
 
   componentDidMount() {
-    this.fetchData();
+    const { dispatch } = this.props;
+    dispatch(fetchCurrencies());
   }
 
   handleChange({ target }) {
@@ -28,13 +28,9 @@ class WalletForm extends Component {
     });
   }
 
-  fetchData() {
-    // função que preenche o array de currencies, na store;
-    console.log('fazer um dispatch para a store com o thunk');
-  }
-
   render() {
-    const { isFetching, valueInput, descriptionInput } = this.state;
+    const { isFetching, valueInput, descriptionInput, currencies } = this.state;
+    console.log('oque tem no array currencies:', currencies);
     return (
       <div>
         <div>
@@ -100,6 +96,7 @@ const mapStateToProps = (store) => ({
 });
 
 WalletForm.propTypes = ({
+  dispatch: PropTypes.func.isRequired,
   wallet: PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
     expenses: PropTypes.arrayOf(PropTypes.string).isRequired,

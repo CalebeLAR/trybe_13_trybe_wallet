@@ -62,9 +62,9 @@ class Login extends React.Component {
     const { emailInput, passwordInput, isDisabled } = this.state;
     return (
       <div>
-        <dia>
+        <div>
           <WalletForm />
-        </dia>
+        </div>
         <section>
           <form>
             <label htmlFor="emailInput">

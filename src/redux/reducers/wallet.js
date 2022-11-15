@@ -1,4 +1,4 @@
-import { ADD_WALLET } from '../actions/walletActions';
+import { ADD_WALLET, GET_CURRENCIES } from '../actions/walletActions';
 
 const WALLET_INITIAL_STATE = {
   // wallet: {
@@ -15,6 +15,11 @@ const wallet = (store = WALLET_INITIAL_STATE, action) => {
     return ({
       ...store,
       wallet: action.wallet,
+    });
+  case GET_CURRENCIES:
+    return ({
+      ...store,
+      currencies: action.currencies,
     });
   default:
     return store;
