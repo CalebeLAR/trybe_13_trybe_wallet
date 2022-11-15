@@ -3,25 +3,64 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 class WalletForm extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isFetching: false,
+      // request: undefined,
+      valueInput: '',
+      descriptionInput: '',
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.fetchData = this.fetchData.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  handleChange({ target }) {
+    const name = target.id;
+    const { value } = target;
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  fetchData() {
+    // função que preenche o array de currencies, na store;
+    console.log('fazer um dispatch para a store com o thunk');
+  }
+
   render() {
+    const { isFetching, valueInput, descriptionInput } = this.state;
     return (
       <div>
-        <div>WalletForm</div>
+        <div>
+          WalletForm
+          {isFetching}
+
+        </div>
         <form>
           <label htmlFor="valueInput">
             valor da despesa:
             <input
+              data-testid="value-input"
               id="valueInput"
               type="text"
-              data-testid="value-input"
+              value={ valueInput }
+              onChange={ this.handleChange }
             />
           </label>
           <label htmlFor="descriptionInput">
             descrição da despesa:
             <input
+              data-testid="description-input"
               id="descriptionInput"
               type="textarea"
-              data-testid="description-input"
+              value={ descriptionInput }
+              onChange={ this.handleChange }
             />
           </label>
           <label htmlFor="currencyInput">
@@ -41,9 +80,9 @@ class WalletForm extends Component {
               <option value="Cartão de débito">Cartão de débito</option>
             </select>
           </label>
-          <label htmlFor="methodInput">
+          <label htmlFor="tag-input">
             Método de pagamento
-            <select id="methodInput" data-testid="tag-input">
+            <select id="tagInput" data-testid="tag-input">
               <option value="Alimentação">Alimentação</option>
               <option value="Lazer">Lazer</option>
               <option value="Trabalho">Trabalho</option>
