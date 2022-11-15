@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class WalletForm extends Component {
   render() {
@@ -54,5 +56,24 @@ class WalletForm extends Component {
     );
   }
 }
+const mapStateToProps = (store) => ({
+  wallet: store.wallet,
+});
 
-export default WalletForm;
+WalletForm.propTypes = ({
+  wallet: PropTypes.shape({
+    currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+    expenses: PropTypes.arrayOf(PropTypes.string).isRequired,
+    editor: PropTypes.bool.isRequired,
+    idToEdit: PropTypes.number.isRequired,
+  }),
+});
+
+WalletForm.defaultProps = ({
+  wallet: PropTypes.shape({
+    currencies: [],
+    expenses: [],
+  }),
+});
+
+export default connect(mapStateToProps)(WalletForm);
