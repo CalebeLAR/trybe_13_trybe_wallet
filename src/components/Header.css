@@ -1,0 +1,15 @@
+.flex-row-alig-items > div, header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+header {
+  background-color: burlywood;
+}
+
+.imgIcon {
+  border-radius: 100%;
+}

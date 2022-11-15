@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './Login.css';
 import { connect } from 'react-redux';
 import { actAddUser } from '../redux/actions/userActions';
+import Header from '../components/Header';
 
 class Login extends React.Component {
   constructor() {
@@ -54,46 +55,51 @@ class Login extends React.Component {
     const { dispatch, history } = this.props;
     dispatch(actAddUser(emailInput));
 
-    history.push('/carteira');
+    history.push('/');
   }
 
   render() {
     const { emailInput, passwordInput, isDisabled } = this.state;
     return (
-      <section>
-        <form>
-          <label htmlFor="emailInput">
-            email
-            <input
-              id="emailInput"
-              data-testid="email-input"
-              type="email"
-              value={ emailInput }
-              onChange={ this.handleChange }
-              placeholder="email"
-            />
-          </label>
-          <label htmlFor="passwordInput">
-            password
-            <input
-              id="passwordInput"
-              data-testid="password-input"
-              type="password"
-              value={ passwordInput }
-              onChange={ this.handleChange }
-              placeholder="password"
-            />
-          </label>
-          <button
-            type="button"
-            disabled={ isDisabled }
-            onClick={ this.submmitLogin }
-          >
-            Entrar
+      <div>
+        <div>
+          <Header />
+        </div>
+        <section>
+          <form>
+            <label htmlFor="emailInput">
+              email
+              <input
+                id="emailInput"
+                data-testid="email-input"
+                type="email"
+                value={ emailInput }
+                onChange={ this.handleChange }
+                placeholder="email"
+              />
+            </label>
+            <label htmlFor="passwordInput">
+              password
+              <input
+                id="passwordInput"
+                data-testid="password-input"
+                type="password"
+                value={ passwordInput }
+                onChange={ this.handleChange }
+                placeholder="password"
+              />
+            </label>
+            <button
+              type="button"
+              disabled={ isDisabled }
+              onClick={ this.submmitLogin }
+            >
+              Entrar
 
-          </button>
-        </form>
-      </section>
+            </button>
+          </form>
+        </section>
+      </div>
     );
   }
 }
