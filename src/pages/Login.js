@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import './Login.css';
 import { connect } from 'react-redux';
 import { actAddUser } from '../redux/actions/userActions';
-import WalletForm from '../components/WalletForm';
 
 class Login extends React.Component {
   constructor() {
@@ -62,9 +61,9 @@ class Login extends React.Component {
     const { emailInput, passwordInput, isDisabled } = this.state;
     return (
       <div>
-        <div>
+        {/* <div>
           <WalletForm />
-        </div>
+        </div> */}
         <section>
           <form>
             <label htmlFor="emailInput">

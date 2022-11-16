@@ -62,7 +62,7 @@ class WalletForm extends Component {
         </div>
         <form>
           <label htmlFor="valueInput">
-            valor da despesa:
+            Valor da despesa:
             <input
               data-testid="value-input"
               id="valueInput"
@@ -72,7 +72,7 @@ class WalletForm extends Component {
             />
           </label>
           <label htmlFor="descriptionInput">
-            descrição da despesa:
+            Descrição da despesa:
             <input
               data-testid="description-input"
               id="descriptionInput"
@@ -110,7 +110,7 @@ class WalletForm extends Component {
             </select>
           </label>
           <label htmlFor="tag-input">
-            categoria para a despesa (tag)
+            Categoria para a despesa (tag)
             <select
               id="tagInput"
               data-testid="tag-input"
