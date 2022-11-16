@@ -1,0 +1,32 @@
+.walletFormTop {
+  margin: 50px;
+  background-color: blue;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.walletForm {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: stretch;
+  justify-content: space-between;
+  padding: 30px;
+  background-color: blue;
+}
+
+.walletForm > label{
+  text-align: center;
+  margin: 5px;
+  font: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: bold;
+  font-size: medium;
+
+}
+
+.walletForm > label > input, select{
+  display: inline;
+  width: 200px
+}
