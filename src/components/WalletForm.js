@@ -11,7 +11,7 @@ class WalletForm extends Component {
       valueInput: '',
       currencyInput: '',
       descriptionInput: '',
-      // tagInput: '',
+      tagInput: '',
 
     };
 
@@ -24,13 +24,16 @@ class WalletForm extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    // faz uma primeira verificação no valor do select: currency-input e methodInput
     const { currencies } = this.props;
     const { currencyInput } = this.state;
 
-    // depois de toda a atualização no estado esse trecho de código é executado
-    if (prevProps.currencies.length === 0 && currencyInput === '') {
+    // !prevProps.currencies.length e !currencyInput só são false antes do componentDidMount;
+    if (!prevProps.currencies.length && !currencyInput) {
       this.setState({
         currencyInput: currencies[0],
+        methodInput: 'Dinheiro',
+        tagInput: 'Alimentação',
       });
     }
   }
@@ -48,7 +51,8 @@ class WalletForm extends Component {
       valueInput,
       descriptionInput,
       currencyInput,
-      // tagInput,
+      methodInput,
+      tagInput,
     } = this.state;
     const { currencies } = this.props;
     return (
@@ -94,15 +98,25 @@ class WalletForm extends Component {
           </label>
           <label htmlFor="methodInput">
             Método de pagamento
-            <select id="methodInput" data-testid="method-input">
+            <select
+              id="methodInput"
+              data-testid="method-input"
+              value={ methodInput }
+              onChange={ this.handleChange }
+            >
               <option value="Dinheiro">Dinheiro</option>
               <option value="Cartão de crédito">Cartão de crédito</option>
               <option value="Cartão de débito">Cartão de débito</option>
             </select>
           </label>
           <label htmlFor="tag-input">
-            Método de pagamento
-            <select id="tagInput" data-testid="tag-input">
+            categoria para a despesa (tag)
+            <select
+              id="tagInput"
+              data-testid="tag-input"
+              value={ tagInput }
+              onChange={ this.handleChange }
+            >
               <option value="Alimentação">Alimentação</option>
               <option value="Lazer">Lazer</option>
               <option value="Trabalho">Trabalho</option>
