@@ -7,9 +7,12 @@ class WalletForm extends Component {
   constructor() {
     super();
     this.state = {
-      isFetching: false,
+      // isFetching: false,
       valueInput: '',
+      currencyInput: '',
       descriptionInput: '',
+      // tagInput: '',
+
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -18,6 +21,18 @@ class WalletForm extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchCurrencies());
+  }
+
+  componentDidUpdate(prevProps) {
+    const { currencies } = this.props;
+    const { currencyInput } = this.state;
+
+    // depois de toda a atualização no estado esse trecho de código é executado
+    if (prevProps.currencies.length === 0 && currencyInput === '') {
+      this.setState({
+        currencyInput: currencies[0],
+      });
+    }
   }
 
   handleChange({ target }) {
@@ -29,14 +44,17 @@ class WalletForm extends Component {
   }
 
   render() {
-    const { isFetching, valueInput, descriptionInput, currencies } = this.state;
-    console.log('oque tem no array currencies:', currencies);
+    const {
+      valueInput,
+      descriptionInput,
+      currencyInput,
+      // tagInput,
+    } = this.state;
+    const { currencies } = this.props;
     return (
       <div>
         <div>
           WalletForm
-          {isFetching}
-
         </div>
         <form>
           <label htmlFor="valueInput">
@@ -61,11 +79,17 @@ class WalletForm extends Component {
           </label>
           <label htmlFor="currencyInput">
             Moeda
-            <select id="currencyInput" data-testid="currency-input">
-              <option value="moeda 1">moeda 1</option>
-              <option value="moeda 2">moeda 2</option>
-              <option value="moeda 3">moeda 3</option>
-              <option value="moeda 4">moeda 4</option>
+            <select
+              data-testid="currency-input"
+              id="currencyInput"
+              value={ currencyInput }
+              onChange={ this.handleChange }
+            >
+              {
+                currencies.map((currency) => (
+                  <option key={ currency } value={ currency }>{ currency }</option>
+                ))
+              }
             </select>
           </label>
           <label htmlFor="methodInput">
@@ -92,24 +116,16 @@ class WalletForm extends Component {
   }
 }
 const mapStateToProps = (store) => ({
-  wallet: store.wallet,
+  currencies: store.wallet.currencies,
 });
 
 WalletForm.propTypes = ({
   dispatch: PropTypes.func.isRequired,
-  wallet: PropTypes.shape({
-    currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-    expenses: PropTypes.arrayOf(PropTypes.string).isRequired,
-    editor: PropTypes.bool.isRequired,
-    idToEdit: PropTypes.number.isRequired,
-  }),
+  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
 });
 
-WalletForm.defaultProps = ({
-  wallet: PropTypes.shape({
-    currencies: [],
-    expenses: [],
-  }),
-});
+// WalletForm.defaultProps = ({
+//   currencies: [],
+// });
 
 export default connect(mapStateToProps)(WalletForm);
