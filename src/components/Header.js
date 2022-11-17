@@ -46,7 +46,6 @@ class Header extends Component {
           />
           <h3 data-testid="email-field">{email}</h3>
         </div>
-        <button type="button" onClick={ this.getTotal }>asdf</button>
       </header>
     );
   }

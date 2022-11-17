@@ -21,6 +21,7 @@ class WalletForm extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.addExpense = this.addExpense.bind(this);
+    this.clearAllInputs = this.clearAllInputs.bind(this);
   }
 
   componentDidMount() {
@@ -36,13 +37,26 @@ class WalletForm extends Component {
     });
   }
 
+  clearAllInputs() {
+    this.setState({
+      value: '',
+      currency: 'USD',
+      description: '',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+    });
+  }
+
   addExpense() {
     const { dispatch } = this.props;
     this.setState((prevState) => {
       this.setState({
         id: prevState.id + 1,
       });
-    }, () => dispatch(thunkFetchQuotation(this.state)));
+    }, () => {
+      dispatch(thunkFetchQuotation(this.state));
+      this.clearAllInputs();
+    });
   }
 
   render() {
