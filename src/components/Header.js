@@ -6,8 +6,25 @@ import './Header.css';
 const inconUserSrc = 'https://thumbs.dreamstime.com/z/%C3%ADcone-do-avatar-usu%C3%A1rio-bot%C3%A3o-s%C3%ADmbolo-perfil-liso-da-pessoa-vetor-131363829.jpg';
 
 class Header extends Component {
+  constructor() {
+    super();
+    this.getTotal = this.getTotal.bind(this);
+  }
+
+  getTotal() {
+    const { expenses } = this.props;
+    let total = 0;
+    expenses.forEach((expense) => {
+      const { currency, exchangeRates, value } = expense;
+      const currencyAsk = exchangeRates[currency].ask;
+      const callCotation = (+value * +currencyAsk);
+      total += callCotation;
+    });
+    return total.toFixed(2);
+  }
+
   render() {
-    const { user: { email } } = this.props;
+    const { email } = this.props;
     return (
       <header className="flex-row-alig-items">
         <div>
@@ -16,8 +33,8 @@ class Header extends Component {
         <div>
           <h3>
             {'Total de despesas: '}
-            <span data-testid="total-field">{0}</span>
-            <span data-testid="header-currency-field">{' BRL'}</span>
+            <span data-testid="total-field">{ this.getTotal() }</span>
+            <span data-testid="header-currency-field">{' BRL '}</span>
           </h3>
         </div>
         <div>
@@ -29,18 +46,15 @@ class Header extends Component {
           />
           <h3 data-testid="email-field">{email}</h3>
         </div>
+        <button type="button" onClick={ this.getTotal }>asdf</button>
       </header>
     );
   }
 }
 
-Header.propTypes = {
-  user: PropTypes.shape({ email: PropTypes.string.isRequired }).isRequired,
-};
-
 const mapStateToProps = (store) => ({
-  user: store.user,
-  wallet: store.wallet,
+  email: store.user.email,
+  expenses: store.wallet.expenses,
 });
 
 export default connect(mapStateToProps)(Header);

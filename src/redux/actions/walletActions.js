@@ -5,7 +5,7 @@ export const actAddWallet = (wallet) => ({
   wallet,
 });
 
-// actions assincronas na página do walletForm
+// actions assincronas na página de Login
 export const REQUEST_API = 'REQUEST_API';
 export const GET_CURRENCIES = 'GET_CURRENCIES';
 
