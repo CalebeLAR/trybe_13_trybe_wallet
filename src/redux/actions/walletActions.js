@@ -13,13 +13,33 @@ export const actFecthAPI = ({ type: REQUEST_API });
 
 export const actGetCurrencies = (currencies) => ({ type: GET_CURRENCIES, currencies });
 
-export function fetchCurrencies() {
+export function thunkFetchCurrencies() {
   return async (dispatch) => {
     try {
       const request = await fetch('https://economia.awesomeapi.com.br/json/all');
       const json = await request.json();
       const currencies = Object.keys(json).filter((coin) => coin !== 'USDT'); // [m1, m2, m3]
       return dispatch(actGetCurrencies(currencies));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+// actions assincronas na página do walletForm
+export const ADD_EXPENSES = 'ADD_EXPENSES';
+
+export const actGetExpenses = (expenses) => (
+  { type: ADD_EXPENSES, expenses });
+
+export function thunkFetchQuotation(walletFormInputs) {
+  return async (dispatch) => {
+    try {
+      const request = await fetch('https://economia.awesomeapi.com.br/json/all');
+      const json = await request.json();
+      const expenses = { ...walletFormInputs, exchangeRates: json };
+      console.log(expenses);
+      return dispatch(actGetExpenses(expenses));
     } catch (error) {
       console.log(error);
     }
