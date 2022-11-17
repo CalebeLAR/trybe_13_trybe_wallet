@@ -38,7 +38,6 @@ export function thunkFetchQuotation(walletFormInputs) {
       const request = await fetch('https://economia.awesomeapi.com.br/json/all');
       const json = await request.json();
       const expenses = { ...walletFormInputs, exchangeRates: json };
-      console.log(expenses);
       return dispatch(actGetExpenses(expenses));
     } catch (error) {
       console.log(error);

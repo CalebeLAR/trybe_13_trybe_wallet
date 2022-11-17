@@ -10,7 +10,7 @@ class WalletForm extends Component {
     super();
     this.state = {
       // isFetching: false,
-      id: 0,
+      id: -1,
       value: '',
       currency: 'USD',
       description: '',
@@ -155,9 +155,5 @@ WalletForm.propTypes = ({
   dispatch: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
 });
-
-// WalletForm.defaultProps = ({
-//   currencies: [],
-// });
 
 export default connect(mapStateToProps)(WalletForm);
