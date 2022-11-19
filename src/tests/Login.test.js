@@ -40,11 +40,50 @@ describe('testes para a página de login', () => {
     });
   });
   describe('testes para o botão', () => {
-    test('(4) deve ser renderizado um botão com o texto "Entrar"', () => {
+    test('(4) deve ser renderizado um botão com o texto "Entrar", que inicilamente deve estar desabilitado', () => {
       renderWithRouterAndRedux(<App />);
       const btnEntrar = screen.getByRole('button', { name: 'Entrar' });
       expect(btnEntrar).toBeInTheDocument();
+      expect(btnEntrar).toBeDisabled();
       expect(btnEntrar).toBeVisible();
+    });
+
+    test('(5) o botão "Entrar" so pode ficar habilitado, depois de serem corretamente preenchidos os campos password e email', () => {
+      renderWithRouterAndRedux(<App />);
+      // constantes para pegar os elementos da pagina
+      const roleButton = ['button', { name: 'Entrar' }];
+      const email = 'email';
+      const password = 'password';
+
+      // logando com email invalido e senha invalidos
+      userEvent.type(screen.getByLabelText(email), 'email sem arroba e sem ponto com');
+      userEvent.type(screen.getByLabelText(password), 'sinco'); // (com menos de 6 digitos)
+      expect(screen.getByRole(...roleButton)).toBeDisabled();
+
+      // logando com email e senha válidos
+      userEvent.type(screen.getByLabelText(email), 'email@valido.com');
+      userEvent.type(screen.getByLabelText(password), 'seisdigitos'); // (com mais de 6 digitos)
+      expect(screen.getByRole(...roleButton)).toBeEnabled();
+    });
+    test('(6) o botão "Entrar" deve direcionar para a página wallet, carregada na rota "/carteira"', async () => {
+      const { history } = renderWithRouterAndRedux(<App />);
+      // constantes para pegar os elementos da pagina
+      const roleButton = ['button', { name: 'Entrar' }];
+      const email = 'email';
+      const password = 'password';
+
+      // logando com email e senha válidos
+      userEvent.type(screen.getByLabelText(email), 'email@valido.com');
+      userEvent.type(screen.getByLabelText(password), 'seisdigitos'); // (com mais de 6 digitos)
+      expect(screen.getByRole(...roleButton)).toBeEnabled();
+
+      // antes de clicar no botão a URL da pagina é "/"
+      expect(history.location.pathname).toBe('/');
+
+      // depois de clicar no botão a pagina é redirecionada para a wallet, na URL "/carteira"
+      userEvent.click(screen.getByRole(...roleButton));
+      expect(await screen.findByRole('heading', { name: 'TRYBE WALLET', level: 3 })).toBeInTheDocument();
+      expect(history.location.pathname).toBe('/carteira');
     });
   });
 });

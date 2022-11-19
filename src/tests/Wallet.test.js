@@ -1,5 +1,4 @@
-import { screen, waitForElementToBeRemoved } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import App from '../App';
