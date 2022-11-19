@@ -8,7 +8,7 @@ const stringTest = 'test@gmail.com';
 
 // testes
 describe('testes para a página de login', () => {
-  test('(1) a rota inicial deve ser a rota "/"', () => {
+  test('(1) a pagina de login deve ser carregada na rota "/"', () => {
     const { history } = renderWithRouterAndRedux(<App />);
     expect(history.location.pathname).toBe('/');
   });
