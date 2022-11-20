@@ -1,4 +1,4 @@
-table {
+/* table {
   display: flex;
   flex-direction: row;
   margin-left: 10px;
@@ -19,4 +19,4 @@ th, td{
   border-radius: 5%;
   background-color: aqua;
   border: solid black 2px;
-}
+} */
