@@ -8,9 +8,9 @@ table {
   border: solid black 2px;
 }
 
-table > div {
+/* table > div {
   margin: auto;
-}
+} */
 
 th, td{
   width: 155px;

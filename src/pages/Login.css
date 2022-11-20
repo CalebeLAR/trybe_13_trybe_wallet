@@ -1,4 +1,4 @@
-section {
+.login > section {
   display: block;
   margin: auto;
   margin-top: 10%;
@@ -8,13 +8,13 @@ section {
   border: solid 3px blue ;
 }
 
-form {
+.login > form {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
-input , label {
+.login > section > form input, label {
   margin: 1px;
   width: 300px;
 }

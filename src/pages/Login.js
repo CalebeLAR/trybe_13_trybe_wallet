@@ -60,11 +60,11 @@ class Login extends React.Component {
   render() {
     const { emailInput, passwordInput, isDisabled } = this.state;
     return (
-      <div>
+      <div className="login">
         {/* <div>
           <WalletForm />
         </div> */}
-        <section>
+        <section className="login">
           <form>
             <label htmlFor="emailInput">
               email

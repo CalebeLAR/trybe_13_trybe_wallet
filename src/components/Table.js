@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './Table.css';
 
 class Table extends Component {
   render() {
+    const { wallet } = this.props;
+    console.log(wallet);
     return (
-      <div>
+      <section>
         <samp>Table</samp>
         <table>
-          <div>
+          <thead>
             <tr>
               <th>Descrição</th>
               <th>Tag</th>
@@ -19,6 +22,8 @@ class Table extends Component {
               <th>Moeda de conversão</th>
               <th>Editar/Excluir</th>
             </tr>
+          </thead>
+          <tbody>
             <tr>
               <td>valor 1</td>
               <td>valor 2</td>
@@ -30,11 +35,14 @@ class Table extends Component {
               <td>valor 8</td>
               <td>valor 9</td>
             </tr>
-          </div>
+          </tbody>
         </table>
-      </div>
+      </section>
     );
   }
 }
+const mapStateToProps = (store) => ({
+  wallet: { ...store.wallet },
+});
 
-export default Table;
+export default connect(mapStateToProps)(Table);
