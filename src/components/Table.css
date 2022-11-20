@@ -1,4 +1,4 @@
-/* table {
+table {
   display: flex;
   flex-direction: row;
   margin-left: 10px;
@@ -12,11 +12,20 @@ table > thead, tbody {
   margin: auto;
 }
 
-th, td{
+th, td {
   width: 155px;
   padding: 10px;
   text-align: center;
   border-radius: 5%;
   background-color: aqua;
   border: solid black 2px;
-} */
+}
+
+.tableButton {
+  width: 155px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5%;
+  background-color: aqua;
+  border: solid black 2px;
+}

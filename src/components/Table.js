@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { actEditExpense } from '../redux/actions/walletActions';
 import './Table.css';
 
 class Table extends Component {
@@ -10,6 +11,7 @@ class Table extends Component {
     this.getCurrencyASK = this.getCurrencyASK.bind(this);
     this.getExpenseCotation = this.getExpenseCotation.bind(this);
     this.getExpenseValue = this.getExpenseValue.bind(this);
+    this.buttonEdit = this.buttonEdit.bind(this);
   }
 
   getCurrencyName(expense) {
@@ -45,6 +47,12 @@ class Table extends Component {
     return formatedValue;
   }
 
+  buttonEdit(id) {
+    const { dispatch } = this.props;
+    dispatch(actEditExpense(id));
+    console.log('click', id);
+  }
+
   render() {
     const { expenses } = this.props;
     return (
@@ -76,7 +84,15 @@ class Table extends Component {
                   <td>{this.getCurrencyASK(expense)}</td>
                   <td>{this.getExpenseCotation(expense)}</td>
                   <td>BRL</td>
-                  <td>botão de editar/excluir</td>
+                  <td>
+                    <button
+                      data-testid="delete-btn"
+                      type="button"
+                      onClick={ () => (this.buttonEdit(expense.id)) }
+                    >
+                      editar/excluir
+                    </button>
+                  </td>
                 </tr>
               ))
             }
@@ -91,6 +107,7 @@ const mapStateToProps = (store) => ({
 });
 
 Table.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.shape({
     currency: PropTypes.string.isRequired,
     exchangeRates: PropTypes.shape({

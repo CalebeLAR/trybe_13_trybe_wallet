@@ -1,9 +1,13 @@
 export const ADD_WALLET = 'ADD_WALLET';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
 
 export const actAddWallet = (wallet) => ({
   type: ADD_WALLET,
   wallet,
 });
+
+// action para o botão de editar e remover despesa
+export const actEditExpense = (expenseId) => ({ type: EDIT_EXPENSE, expenseId });
 
 // actions assincronas na página de Login
 export const REQUEST_API = 'REQUEST_API';

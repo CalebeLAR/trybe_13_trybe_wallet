@@ -1,4 +1,4 @@
-/* .flex-row-alig-items > div, header {
+.flex-row-alig-items > div, header {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -12,4 +12,4 @@ header {
 
 .imgIcon {
   border-radius: 100%;
-} */
+}
