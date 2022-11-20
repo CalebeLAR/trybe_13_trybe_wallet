@@ -9,6 +9,7 @@ class Table extends Component {
     this.getCurrencyName = this.getCurrencyName.bind(this);
     this.getCurrencyASK = this.getCurrencyASK.bind(this);
     this.getExpenseCotation = this.getExpenseCotation.bind(this);
+    this.getExpenseValue = this.getExpenseValue.bind(this);
   }
 
   getCurrencyName(expense) {
@@ -20,14 +21,27 @@ class Table extends Component {
   getCurrencyASK(expense) {
     const { currency, exchangeRates } = expense;
     const currencyASK = exchangeRates[currency].ask;
-    return currencyASK.replace('.', ',');
+    const askFormat = parseFloat(currencyASK).toFixed(2);
+    return askFormat;
   }
 
   getExpenseCotation(expense) {
     const { currency, exchangeRates, value } = expense;
     const currencyASK = exchangeRates[currency].ask;
     const valueCotation = (value * currencyASK).toFixed(2);
-    const formatedValue = valueCotation.replace('.', ',');
+    return valueCotation;
+  }
+
+  getExpenseValue(expense) {
+    const { value } = expense;
+    let formatedValue = '00,00';
+    const thereIsPoint = value.includes('.');
+    const thereIsComma = value.includes(',');
+    if (!thereIsPoint && !thereIsComma) {
+      formatedValue = `${value}.00`;
+    } else {
+      formatedValue = `${value}`.replace(',', '.');
+    }
     return formatedValue;
   }
 
@@ -57,7 +71,7 @@ class Table extends Component {
                   <td>{expense.description}</td>
                   <td>{expense.tag}</td>
                   <td>{expense.method}</td>
-                  <td>{expense.value.replace('.', ',')}</td>
+                  <td>{this.getExpenseValue(expense)}</td>
                   <td>{this.getCurrencyName(expense)}</td>
                   <td>{this.getCurrencyASK(expense)}</td>
                   <td>{this.getExpenseCotation(expense)}</td>
