@@ -1,0 +1,22 @@
+table {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  margin-right: 10px;
+  flex-wrap: wrap;
+  background-color: rgb(143, 190, 97);
+  border: solid black 2px;
+}
+
+table > div {
+  margin: auto;
+}
+
+th, td{
+  width: 155px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5%;
+  background-color: aqua;
+  border: solid black 2px;
+}
