@@ -20,7 +20,8 @@ class Header extends Component {
       const callCotation = (+value * +currencyAsk);
       total += callCotation;
     });
-    return total.toFixed(2);
+    const totalFormated = total.toFixed(2).replace('.', ',');
+    return totalFormated;
   }
 
   render() {
