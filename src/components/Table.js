@@ -3,16 +3,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { actEditExpense } from '../redux/actions/walletActions';
 import './Table.css';
+import EditCell from './EditCell';
 
 class Table extends Component {
   constructor() {
     super();
+    this.state = {
+      editID: -1,
+    };
     this.getCurrencyName = this.getCurrencyName.bind(this);
     this.getCurrencyASK = this.getCurrencyASK.bind(this);
     this.getExpenseCotation = this.getExpenseCotation.bind(this);
     this.getExpenseValue = this.getExpenseValue.bind(this);
     this.buttonDelete = this.buttonDelete.bind(this);
     this.buttonEdit = this.buttonEdit.bind(this);
+    this.revertEdit = this.revertEdit.bind(this);
   }
 
   getCurrencyName(expense) {
@@ -55,11 +60,20 @@ class Table extends Component {
   }
 
   buttonEdit(id) {
-    console.log('click', id);
+    this.setState({
+      editID: id,
+    });
+  }
+
+  revertEdit() {
+    this.setState({
+      editID: -1,
+    });
   }
 
   render() {
     const { expenses } = this.props;
+    const { editID } = this.state;
     return (
       <section>
         <samp>Table</samp>
@@ -79,7 +93,13 @@ class Table extends Component {
           </thead>
           <tbody>
             {
-              expenses.map((expense) => (
+              expenses.map((expense) => ((editID === expense.id) ? (
+                <EditCell
+                  key={ expense.id }
+                  expense={ expense }
+                  revertEdit={ this.revertEdit }
+                />
+              ) : (
                 <tr key={ expense.id }>
                   <td>{expense.description}</td>
                   <td>{expense.tag}</td>
@@ -91,22 +111,15 @@ class Table extends Component {
                   <td>BRL</td>
                   <td>
                     <button
-                      data-testid="edit-btn"
+                      data-testid="delete-btn"
                       type="button"
                       onClick={ () => (this.buttonEdit(expense.id)) }
                     >
-                      Editar despesa
-                    </button>
-                    <button
-                      data-testid="delete-btn"
-                      type="button"
-                      onClick={ () => (this.buttonDelete(expense.id)) }
-                    >
-                      Excluir despesa
+                      editar/excluir
                     </button>
                   </td>
                 </tr>
-              ))
+              )))
             }
           </tbody>
         </table>
