@@ -25,7 +25,8 @@ class EditCell extends Component {
   }
 
   buttonSave() {
-    console.log('save');
+    const { expenses } = this.props;
+    console.log(expenses);
   }
 
   render() {
@@ -128,14 +129,15 @@ class EditCell extends Component {
 
 const mapStateToProps = (store) => ({
   currencies: store.wallet.currencies,
+  expenses: store.wallet.expenses,
 });
 
 EditCell.propTypes = {
   revertEdit: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  // expense: PropTypes.shape({
-
-  // }).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.shape({
+    exchangeRates: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  })).isRequired,
 };
 
 export default connect(mapStateToProps)(EditCell);

@@ -1,0 +1,8 @@
+th, td, tr {
+  width: 155px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5%;
+  background-color: aqua;
+  border: solid black 2px;
+}
