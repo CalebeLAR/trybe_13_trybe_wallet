@@ -96,7 +96,7 @@ class Table extends Component {
               expenses.map((expense) => ((editID === expense.id) ? (
                 <EditCell
                   key={ expense.id }
-                  expense={ expense }
+                  editedExpense={ expense }
                   revertEdit={ this.revertEdit }
                 />
               ) : (

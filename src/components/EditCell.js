@@ -7,10 +7,10 @@ class EditCell extends Component {
     super();
     this.state = {
       value: '',
-      currency: '',
+      currency: 'USD',
       description: '',
-      method: '',
-      tag: '',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,8 +25,15 @@ class EditCell extends Component {
   }
 
   buttonSave() {
-    const { expenses } = this.props;
-    console.log(expenses);
+    const { Allexpenses, editedExpense } = this.props;
+    const newExpense = { ...editedExpense, ...this.state };
+    Allexpenses.forEach((expense, index) => {
+      if (expense.id === editedExpense.id) {
+        Allexpenses.splice(index, 1, newExpense);
+      }
+    });
+    const newExpenses = [...Allexpenses];
+    return newExpenses;
   }
 
   render() {
@@ -129,13 +136,17 @@ class EditCell extends Component {
 
 const mapStateToProps = (store) => ({
   currencies: store.wallet.currencies,
-  expenses: store.wallet.expenses,
+  Allexpenses: store.wallet.expenses,
 });
 
 EditCell.propTypes = {
+  editedExpense: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    exchangeRates: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  }).isRequired,
   revertEdit: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  expenses: PropTypes.arrayOf(PropTypes.shape({
+  Allexpenses: PropTypes.arrayOf(PropTypes.shape({
     exchangeRates: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)).isRequired,
   })).isRequired,
 };
