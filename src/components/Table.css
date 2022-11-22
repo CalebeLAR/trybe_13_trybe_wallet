@@ -2,18 +2,23 @@ table {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  align-items: center;
   background-color: rgb(143, 190, 97);
   border: solid black 2px;
 }
 
-table > thead, tbody {
+table>thead,
+tbody {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin: auto;
+  align-content: space-around;
+  justify-content: space-evenly;
 }
 
-th, td {
+th,
+td {
   width: 155px;
   height: 70px;
   text-align: center;
@@ -21,7 +26,8 @@ th, td {
   border: solid black 2px;
 }
 
-td > label, input {
+td>label,
+input {
   width: 155px;
 }
 
