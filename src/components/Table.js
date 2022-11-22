@@ -11,6 +11,7 @@ class Table extends Component {
     this.getCurrencyASK = this.getCurrencyASK.bind(this);
     this.getExpenseCotation = this.getExpenseCotation.bind(this);
     this.getExpenseValue = this.getExpenseValue.bind(this);
+    this.buttonDelete = this.buttonDelete.bind(this);
     this.buttonEdit = this.buttonEdit.bind(this);
   }
 
@@ -47,9 +48,13 @@ class Table extends Component {
     return formatedValue;
   }
 
-  buttonEdit(id) {
+  buttonDelete(id) {
     const { dispatch } = this.props;
     dispatch(actEditExpense(id));
+    console.log('click', id);
+  }
+
+  buttonEdit(id) {
     console.log('click', id);
   }
 
@@ -86,11 +91,18 @@ class Table extends Component {
                   <td>BRL</td>
                   <td>
                     <button
-                      data-testid="delete-btn"
+                      data-testid="edit-btn"
                       type="button"
                       onClick={ () => (this.buttonEdit(expense.id)) }
                     >
-                      editar/excluir
+                      Editar despesa
+                    </button>
+                    <button
+                      data-testid="delete-btn"
+                      type="button"
+                      onClick={ () => (this.buttonDelete(expense.id)) }
+                    >
+                      Excluir despesa
                     </button>
                   </td>
                 </tr>
