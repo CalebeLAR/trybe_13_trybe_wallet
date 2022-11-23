@@ -101,7 +101,7 @@ class Table extends Component {
                   revertEdit={ this.revertEdit }
                 />
               ) : (
-                <tr>
+                <tr key={ expense.id }>
                   <td>{expense.description}</td>
                   <td>{expense.tag}</td>
                   <td>{expense.method}</td>
