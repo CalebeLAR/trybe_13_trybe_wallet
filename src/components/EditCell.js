@@ -26,7 +26,7 @@ class EditCell extends Component {
   }
 
   buttonSave() {
-    const { Allexpenses, editedExpense, dispatch } = this.props;
+    const { Allexpenses, editedExpense, dispatch, revertEdit } = this.props;
     const newExpense = { ...editedExpense, ...this.state };
     Allexpenses.forEach((expense, index) => {
       if (expense.id === editedExpense.id) {
@@ -35,6 +35,7 @@ class EditCell extends Component {
     });
     const newExpenses = [...Allexpenses];
     dispatch(actEditExpense(newExpenses));
+    revertEdit();
   }
 
   render() {

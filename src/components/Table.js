@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { actDeleteExpense } from '../redux/actions/walletActions';
+import { actDeleteExpense, actInEdit } from '../redux/actions/walletActions';
 import './Table.css';
 import EditCell from './EditCell';
 
@@ -56,19 +56,20 @@ class Table extends Component {
   buttonDelete(id) {
     const { dispatch } = this.props;
     dispatch(actDeleteExpense(id));
-    console.log('click', id);
   }
 
   buttonEdit(id) {
+    const { dispatch } = this.props;
     this.setState({
       editID: id,
-    });
+    }, () => dispatch(actInEdit()));
   }
 
   revertEdit() {
+    const { dispatch } = this.props;
     this.setState({
       editID: -1,
-    });
+    }, () => dispatch(actInEdit()));
   }
 
   render() {

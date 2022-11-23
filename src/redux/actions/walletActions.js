@@ -1,6 +1,7 @@
 export const ADD_WALLET = 'ADD_WALLET';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 export const EDIT_EXPENSE = 'EDIT_EXPENSE';
+export const FLAG_IN_EDIT = 'FLAG_IN_EDIT';
 
 export const actAddWallet = (wallet) => ({
   type: ADD_WALLET,
@@ -11,6 +12,8 @@ export const actAddWallet = (wallet) => ({
 export const actDeleteExpense = (expenseId) => ({ type: DELETE_EXPENSE, expenseId });
 
 export const actEditExpense = (newExpenses) => ({ type: EDIT_EXPENSE, newExpenses });
+
+export const actInEdit = () => ({ type: FLAG_IN_EDIT });
 
 // actions assincronas na página de Login
 export const REQUEST_API = 'REQUEST_API';

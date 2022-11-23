@@ -3,7 +3,8 @@ import {
   GET_CURRENCIES,
   ADD_EXPENSES,
   DELETE_EXPENSE,
-  EDIT_EXPENSE } from '../actions/walletActions';
+  EDIT_EXPENSE,
+  FLAG_IN_EDIT } from '../actions/walletActions';
 
 const WALLET_INITIAL_STATE = {
   // wallet: {
@@ -36,6 +37,11 @@ const wallet = (store = WALLET_INITIAL_STATE, action) => {
       ...store,
       expenses: [...store.expenses.filter((expense) => expense.id !== action.expenseId),
       ],
+    });
+  case FLAG_IN_EDIT:
+    return ({
+      ...store,
+      editor: !store.editor,
     });
   case EDIT_EXPENSE:
     return ({
