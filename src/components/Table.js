@@ -76,7 +76,7 @@ class Table extends Component {
     const { expenses } = this.props;
     const { editID } = this.state;
     return (
-      <section>
+      <section style={ { textAlign: 'center' } }>
         <samp>Table</samp>
         <table>
           <thead>

@@ -117,9 +117,6 @@ class EditCell extends Component {
             </select>
           </label>
         </td>
-        <td />
-        <td />
-        <td />
         <td>
           <button
             type="button"
