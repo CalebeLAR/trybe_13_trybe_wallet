@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { actEditExpense } from '../redux/actions/walletActions';
 
 class EditCell extends Component {
   constructor() {
@@ -25,7 +26,7 @@ class EditCell extends Component {
   }
 
   buttonSave() {
-    const { Allexpenses, editedExpense } = this.props;
+    const { Allexpenses, editedExpense, dispatch } = this.props;
     const newExpense = { ...editedExpense, ...this.state };
     Allexpenses.forEach((expense, index) => {
       if (expense.id === editedExpense.id) {
@@ -33,7 +34,7 @@ class EditCell extends Component {
       }
     });
     const newExpenses = [...Allexpenses];
-    return newExpenses;
+    dispatch(actEditExpense(newExpenses));
   }
 
   render() {
@@ -118,7 +119,7 @@ class EditCell extends Component {
         <td>
           <button
             type="button"
-            onClick={ this.buttonSave }
+            onClick={ () => this.buttonSave() }
           >
             Salvar
           </button>
@@ -140,6 +141,7 @@ const mapStateToProps = (store) => ({
 });
 
 EditCell.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   editedExpense: PropTypes.shape({
     id: PropTypes.number.isRequired,
     exchangeRates: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)).isRequired,

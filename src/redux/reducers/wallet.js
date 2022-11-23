@@ -1,5 +1,9 @@
-import { ADD_WALLET,
-  GET_CURRENCIES, ADD_EXPENSES, EDIT_EXPENSE } from '../actions/walletActions';
+import {
+  ADD_WALLET,
+  GET_CURRENCIES,
+  ADD_EXPENSES,
+  DELETE_EXPENSE,
+  EDIT_EXPENSE } from '../actions/walletActions';
 
 const WALLET_INITIAL_STATE = {
   // wallet: {
@@ -27,11 +31,16 @@ const wallet = (store = WALLET_INITIAL_STATE, action) => {
       ...store,
       expenses: [...store.expenses, action.expenses],
     });
-  case EDIT_EXPENSE:
+  case DELETE_EXPENSE:
     return ({
       ...store,
       expenses: [...store.expenses.filter((expense) => expense.id !== action.expenseId),
       ],
+    });
+  case EDIT_EXPENSE:
+    return ({
+      ...store,
+      expenses: [...action.newExpenses],
     });
   default:
     return store;
