@@ -101,7 +101,7 @@ class Table extends Component {
                   revertEdit={ this.revertEdit }
                 />
               ) : (
-                <tr key={ expense.id }>
+                <tr>
                   <td>{expense.description}</td>
                   <td>{expense.tag}</td>
                   <td>{expense.method}</td>
@@ -112,11 +112,11 @@ class Table extends Component {
                   <td>BRL</td>
                   <td>
                     <button
-                      data-testid="delete-btn"
+                      data-testid="edit-btn"
                       type="button"
                       onClick={ () => (this.buttonEdit(expense.id)) }
                     >
-                      Editar despesa
+                      Alterar despesa
                     </button>
                     <button
                       data-testid="delete-btn"
@@ -130,6 +130,7 @@ class Table extends Component {
               )))
             }
           </tbody>
+
         </table>
       </section>
     );
