@@ -1,4 +1,4 @@
-/* table {
+table {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -36,4 +36,4 @@ td > label > input {
   border-radius: 5%;
   background-color: aqua;
   border: solid black 2px;
-} */
+}
