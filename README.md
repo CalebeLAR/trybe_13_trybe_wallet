@@ -48,4 +48,4 @@ Neste projeto eu desenvolvi uma carteira de controle de gastos com conversor de 
 
 
 
-> _Sexto projeto desenvolvido no módulo de Front-End durante minha formação na escola de tecnologia da Trybe, que elaborou os requisitos do projeto e configurações de lint._
+> _Sexto projeto desenvolvido no módulo de Front-End durante minha formação na escola de tecnologia da Trybe, que elaborou os requisitos do projeto._
