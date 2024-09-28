@@ -17,7 +17,7 @@ Neste projeto eu desenvolvi uma carteira de controle de gastos com conversor de 
 **1. Clone o repositório**
 
 ```shell
-    git clone git@github.com:CalebeLAR/trybe_wallet.git
+    git clone git@github.com:CalebeLAR/trybe_13_trybe_wallet.git
 ```
 
 **2. Instale as dependências**
